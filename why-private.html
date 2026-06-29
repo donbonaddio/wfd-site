@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Your meals, your family, your kitchen — none of it leaves your iCloud.">
+<title>Privacy by architecture — What's For Dinner Tonight</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="icon.png" alt="" class="brand-icon">
+      <span>What's For Dinner Tonight</span>
+    </a>
+    <nav class="primary-nav">
+      <a href="index.html">Home</a>
+      <a href="how.html">How it works</a>
+      <a href="why-private.html">Privacy</a>
+      <a href="faq.html">FAQ</a>
+      <a href="about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+<h1>Privacy by architecture</h1>
+<p><em>Your meals, your family, your kitchen — none of it leaves your iCloud.</em></p>
+<p>Meal planning is intimate. Who&rsquo;s home tonight, what your kid won&rsquo;t eat, what your spouse is allergic to, what you cook when you&rsquo;re tired. We didn&rsquo;t want to be the company that has that file on you.</p>
+<p>So we built WFD on top of your own iCloud, not on a server we control.</p>
+<h2>How your data flows</h2>
+<p>Every meal in your library, every dinner you&rsquo;ve logged, every shopping check, every Queue item, every shared household — all of it lives in your private CloudKit container. That&rsquo;s a per-user data store provided by Apple. We don&rsquo;t have a database. We literally cannot see your library because there&rsquo;s no place for us to look.</p>
+<p>When you share a household with your spouse, the data sync happens between your two iCloud accounts using Apple&rsquo;s CloudKit sharing. We aren&rsquo;t in the middle. Your spouse sees your meals because Apple&rsquo;s infrastructure delivered them — not because our server forwarded a copy.</p>
+<h2>How the AI features work</h2>
+<p>WFD uses three kinds of intelligence, in this order of preference:</p>
+<p><strong>Apple Intelligence (on-device).</strong> Voice transcription, the &ldquo;Ask WFD&rdquo; voice assistant, the meal photo matching — these run entirely on your iPhone. Nothing leaves the device.</p>
+<p><strong>Your iCloud (the CloudKit mirror).</strong> Household sync, photo sync, allergy info, shared meal libraries — all moves device-to-device through your Apple ID. We don&rsquo;t host any of it.</p>
+<p><strong>Our recipe assistant API.</strong> A handful of features ask our Worker on api.donbon.com for help — auto-filling ingredients for a new meal, suggesting cooking instructions for a recipe, fetching a stock photo. When this happens, we send:</p>
+<ul>
+<li>The meal name (e.g., &ldquo;Spaghetti Bolognese&rdquo;)</li>
+<li>A list of ingredients (when you have them)</li>
+<li>The cuisine and approximate cooking time</li>
+</ul>
+<p>We don&rsquo;t send your name, your account, your device identifier, your other meals, your family info, your shopping list, or your history. Our Worker logs only a hash of the request (for caching) — not the content.</p>
+<h2>What we don&rsquo;t do</h2>
+<p>We don&rsquo;t run analytics. We don&rsquo;t have ads. We don&rsquo;t sell your data because we don&rsquo;t have your data. We don&rsquo;t recommend brand-name ingredients because no brands pay us to do that. Our recipe suggestions come from a general-purpose model with no commercial bias toward what Whole Foods is selling this week.</p>
+<p>There&rsquo;s no community feed because there&rsquo;s no community we&rsquo;re cultivating. We don&rsquo;t want to be the social network of dinner. We want to help your family decide what to eat tonight and then move on with our day.</p>
+<h2>The architecture in one line</h2>
+<p>If we deleted our database tomorrow, your app would still work. Because we don&rsquo;t have a database.</p>
+<hr />
+<p><em>If &ldquo;we take privacy seriously&rdquo; makes you skeptical, you&rsquo;re our customer.</em></p>
+<p><a href="index.html">Back to home</a> · <a href="faq.html">FAQ</a></p>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="tagline">The family meal planner that finishes what it starts.</p>
+    <p class="meta">© 2026 What's For Dinner Tonight · <a href="mailto:don@whatsfordinnertonight.org">Contact</a></p>
+  </div>
+</footer>
+</body>
+</html>

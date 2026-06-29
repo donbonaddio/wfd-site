@@ -1,0 +1,312 @@
+/* What's For Dinner Tonight — warm, readable, fast.
+ *
+ * Single stylesheet for the whole site. No build step beyond build.py
+ * copying this file into ./build/.
+ *
+ * Design notes:
+ * - System fonts so the site feels native on each platform
+ * - Comfortable measure (45-75 chars per line) for actual reading
+ * - One column, generous spacing, no sidebar, no popups
+ * - Color-as-wayfinding palette mirrors the iOS app:
+ *     coral  = primary brand / Eat In path
+ *     sage   = pantry / "What do I have" path
+ *     navy   = Eat Out / restaurant path
+ * - No JS required
+ */
+
+/* ---- Variables ---- */
+
+:root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --fg-muted: #5a5a5a;
+    --fg-tertiary: #8a8a8a;
+
+    /* WFD palette — coral is primary brand. Sage and navy are
+     * wayfinding accents echoing the iOS app's color-per-mode
+     * design principle (#705 / #706). */
+    --accent: #d65d3a;            /* WFD coral - Eat In / primary CTA */
+    --accent-dark: #b34a2c;
+    --sage: #6f8e6e;              /* What do I have / pantry */
+    --sage-dark: #557555;
+    --navy: #3a4a6d;              /* Eat Out / restaurants */
+    --navy-dark: #2c3a59;
+
+    --border: #e8e6e0;
+    --surface: #faf8f5;            /* warm cream — matches in-app warmSurface */
+    --code-bg: #f4f1ec;
+
+    --maxw: 42rem;
+    --maxw-wide: 56rem;
+
+    --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
+                 Roboto, Helvetica, Arial, sans-serif;
+    --font-serif: "New York", "Charter", "Georgia", "Iowan Old Style", serif;
+}
+
+/* ---- Reset / base ---- */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--fg);
+    background: var(--bg);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    width: 100%;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* ---- Header / nav ---- */
+
+.site-header {
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    padding: 0.9rem 0;
+    margin-bottom: 2rem;
+}
+
+.site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    text-decoration: none;
+    color: var(--fg);
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+}
+
+.brand-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 7px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.primary-nav {
+    display: flex;
+    gap: 1.3rem;
+    flex-wrap: wrap;
+}
+
+.primary-nav a {
+    color: var(--fg-muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.15s ease;
+}
+
+.primary-nav a:hover {
+    color: var(--accent);
+}
+
+/* ---- Headings ---- */
+
+h1, h2, h3, h4 {
+    line-height: 1.25;
+    color: var(--fg);
+    letter-spacing: -0.015em;
+}
+
+h1 {
+    font-size: 2.4rem;
+    margin: 0 0 0.5rem;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 1.55rem;
+    margin: 2.5rem 0 0.8rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+}
+
+h3 {
+    font-size: 1.2rem;
+    margin: 1.8rem 0 0.5rem;
+    font-weight: 600;
+}
+
+p {
+    margin: 0 0 1.1rem;
+}
+
+/* The italic line directly under the H1 is the subtitle — style it
+ * larger and softer than body copy. Markdown renders this as an
+ * <em>...</em> inside a paragraph. */
+main > p:first-of-type em {
+    font-style: italic;
+    color: var(--fg-muted);
+    font-size: 1.15rem;
+    display: inline-block;
+}
+
+/* Bold callouts inside paragraphs (key claims like "Your library, your
+ * family, your kitchen") get extra visual weight. */
+strong {
+    color: var(--fg);
+    font-weight: 700;
+}
+
+/* Hard rule between body and closing kicker line. */
+hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+}
+
+/* The closing italic line (the "If you've tried six recipe apps..."
+ * kicker) gets centered and styled larger to match its rhetorical
+ * weight. */
+main > p > em:only-child {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--fg-muted);
+}
+
+main > hr + p {
+    text-align: center;
+}
+
+main > hr + p + p {
+    text-align: center;
+    font-size: 1.05rem;
+}
+
+/* ---- Links ---- */
+
+a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+    transition: color 0.15s ease;
+}
+
+a:hover {
+    color: var(--accent-dark);
+}
+
+/* ---- Lists ---- */
+
+ul, ol {
+    padding-left: 1.4rem;
+    margin: 0 0 1.2rem;
+}
+
+li {
+    margin-bottom: 0.4rem;
+}
+
+/* ---- Code ---- */
+
+code {
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.9em;
+    background: var(--code-bg);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    color: var(--fg);
+}
+
+pre {
+    background: var(--code-bg);
+    padding: 1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* ---- Tables ---- */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+    font-size: 0.95rem;
+}
+
+th, td {
+    text-align: left;
+    padding: 0.55rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+
+th {
+    font-weight: 600;
+    color: var(--fg);
+    background: var(--surface);
+}
+
+/* ---- Footer ---- */
+
+.site-footer {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    margin-top: 4rem;
+    padding: 1.8rem 0;
+    color: var(--fg-muted);
+}
+
+.site-footer .container {
+    text-align: center;
+}
+
+.site-footer .tagline {
+    font-style: italic;
+    margin: 0 0 0.5rem;
+    color: var(--fg-muted);
+}
+
+.site-footer .meta {
+    font-size: 0.88rem;
+    margin: 0;
+    color: var(--fg-tertiary);
+}
+
+.site-footer a {
+    color: var(--fg-muted);
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 600px) {
+    body { font-size: 17px; }
+    h1 { font-size: 2.0rem; }
+    h2 { font-size: 1.35rem; }
+    .container { padding: 0 1.2rem; }
+    .primary-nav { gap: 1rem; }
+    .primary-nav a { font-size: 0.9rem; }
+}
