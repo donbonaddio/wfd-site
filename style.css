@@ -301,6 +301,21 @@ th {
     color: var(--fg-muted);
 }
 
+/* "More apps from Don's Tech →" cross-promo line. Subtle treatment
+ * — dotted underline, muted color — so it reads as a footer nav
+ * link rather than a content CTA. */
+.site-footer .umbrella {
+    margin: 0.5rem 0 0.6rem;
+    font-size: 0.92rem;
+}
+
+.site-footer .umbrella a {
+    text-decoration: none;
+    border-bottom: 1px dotted var(--border);
+    padding-bottom: 1px;
+    transition: color 0.15s ease, border-bottom-color 0.15s ease;
+}
+
 .site-footer .meta {
     font-size: 0.88rem;
     margin: 0;
